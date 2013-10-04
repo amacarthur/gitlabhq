@@ -1,17 +1,3 @@
-GIT
-  remote: https://github.com/ctran/annotate_models.git
-  revision: 18a4e2eb77c8f3ef695b563e4a7ca45dfede819b
-  specs:
-    annotate (2.6.0.beta2)
-      activerecord (>= 2.3.0)
-      rake (>= 0.8.7)
-
-GIT
-  remote: https://github.com/gitlabhq/raphael-rails.git
-  revision: cb2c92a040b9b941a5f1aa1ea866cc26e944fe58
-  specs:
-    raphael-rails (2.1.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -45,17 +31,20 @@ GEM
     acts-as-taggable-on (2.4.1)
       rails (>= 3, < 5)
     addressable (2.3.4)
+    annotate (2.6.0.beta2)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     arel (3.0.2)
     asciidoctor (0.1.3)
-    awesome_print (1.1.0)
+    awesome_print (1.2.0)
     backports (3.3.2)
-    bcrypt-ruby (3.0.1)
-    better_errors (0.9.0)
+    bcrypt-ruby (3.1.1)
+    better_errors (1.0.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (2.3.2.0)
+    bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     builder (3.0.4)
     capybara (2.1.0)
@@ -72,10 +61,14 @@ GEM
     charlock_holmes (0.6.9.4)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
-    chosen-rails (0.9.8)
-      railties (~> 3.0)
-      thor (~> 0.14)
-    code_analyzer (0.3.2)
+    chosen-rails (1.0.0)
+      coffee-rails (>= 3.2)
+      compass-rails (>= 1.0)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
+    chunky_png (1.2.8)
+    cliver (0.2.1)
+    code_analyzer (0.4.3)
       sexp_processor
     coderay (1.0.9)
     coffee-rails (3.2.2)
@@ -87,22 +80,28 @@ GEM
     coffee-script-source (1.6.2)
     colored (1.2)
     colorize (0.5.8)
+    compass (0.12.2)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
+    compass-rails (1.0.3)
+      compass (>= 0.12.2, < 0.14)
     connection_pool (1.1.0)
-    coveralls (0.6.7)
-      colorize
+    coveralls (0.7.0)
       multi_json (~> 1.3)
       rest-client
       simplecov (>= 0.7)
+      term-ansicolor
       thor
     crack (0.4.0)
       safe_yaml (~> 0.9.0)
     d3_rails (3.1.10)
       railties (>= 3.1.0)
     daemons (1.1.9)
-    database_cleaner (1.0.1)
+    database_cleaner (1.1.1)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.1)
-    devise (2.2.4)
+    devise (2.2.5)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (~> 3.1)
@@ -129,9 +128,7 @@ GEM
       multipart-post (~> 1.1)
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
-    faye-websocket (0.4.7)
-      eventmachine (>= 0.12.0)
-    ffaker (1.16.1)
+    ffaker (1.18.0)
     ffi (1.9.0)
     fog (1.3.1)
       builder
@@ -143,12 +140,13 @@ GEM
       net-ssh (>= 2.1.3)
       nokogiri (~> 1.5.0)
       ruby-hmac
-    font-awesome-rails (3.1.1.3)
+    font-awesome-rails (3.2.1.3)
       railties (>= 3.2, < 5.0)
     foreman (0.63.0)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
     formatador (0.2.4)
+    fssm (0.2.10)
     gemoji (1.2.1)
     gherkin-ruby (0.3.0)
     github-linguist (2.3.4)
@@ -158,6 +156,9 @@ GEM
       pygments.rb (>= 0.2.13)
     github-markdown (0.5.3)
     github-markup (0.7.5)
+    gitlab-flowdock-git-hook (0.4.2.2)
+      gitlab-grit (>= 2.4.1)
+      multi_json
     gitlab-gollum-lib (1.0.1)
       github-markdown (~> 0.5.3)
       github-markup (>= 0.7.5, < 1.0.0)
@@ -176,7 +177,7 @@ GEM
     gitlab-pygments.rb (0.3.2)
       posix-spawn (~> 0.3.6)
       yajl-ruby (~> 1.1.0)
-    gitlab_git (1.4.1)
+    gitlab_git (3.0.0.beta1)
       activesupport (~> 3.2.13)
       github-linguist (~> 2.3.4)
       gitlab-grit (~> 2.6.0)
@@ -271,11 +272,11 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.8.1)
-    mime-types (1.23)
+    mime-types (1.25)
     minitest (4.7.4)
     modernizr (2.6.2)
       sprockets (~> 2.0)
-    multi_json (1.7.7)
+    multi_json (1.8.0)
     multi_xml (0.5.4)
     multipart-post (1.2.0)
     mysql2 (0.3.11)
@@ -311,18 +312,17 @@ GEM
       omniauth-oauth (~> 1.0)
     orm_adapter (0.4.0)
     pg (0.15.1)
-    poltergeist (1.3.0)
+    poltergeist (1.4.1)
       capybara (~> 2.1.0)
-      faye-websocket (>= 0.4.4, < 0.5.0)
-      http_parser.rb (~> 0.5.3)
+      cliver (~> 0.2.1)
+      multi_json (~> 1.0)
+      websocket-driver (>= 0.2.0)
     polyglot (0.3.3)
     posix-spawn (0.3.6)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
-    puma (2.3.1)
-      rack (>= 1.1, < 2.0)
     pygments.rb (0.4.2)
       posix-spawn (~> 0.3.6)
       yajl-ruby (~> 1.1.0)
@@ -332,9 +332,11 @@ GEM
     rack (1.4.5)
     rack-accept (0.4.5)
       rack (>= 0.4)
+    rack-attack (2.2.1)
+      rack
     rack-cache (1.2)
       rack (>= 0.4)
-    rack-mini-profiler (0.1.26)
+    rack-mini-profiler (0.1.31)
       rack (>= 1.1.3)
     rack-mount (0.8.3)
       rack (>= 1.0.0)
@@ -355,13 +357,14 @@ GEM
     rails-dev-tweaks (0.6.1)
       actionpack (~> 3.1)
       railties (~> 3.1)
-    rails_best_practices (1.13.8)
+    rails_best_practices (1.14.4)
       activesupport
       awesome_print
-      code_analyzer
+      code_analyzer (>= 0.4.3)
       colored
       erubis
       i18n
+      require_all
       ruby-progressbar
     railties (3.2.13)
       actionpack (= 3.2.13)
@@ -372,6 +375,7 @@ GEM
       thor (>= 0.14.6, < 2.0)
     raindrops (0.11.0)
     rake (10.1.0)
+    raphael-rails (2.1.2)
     rb-fsevent (0.9.3)
     rb-inotify (0.9.0)
       ffi (>= 0.5.0)
@@ -381,25 +385,26 @@ GEM
       json (~> 1.4)
     redcarpet (2.2.2)
     redis (3.0.4)
-    redis-actionpack (3.2.3)
-      actionpack (~> 3.2.3)
-      redis-rack (~> 1.4.0)
+    redis-actionpack (3.2.4)
+      actionpack (~> 3.2.0)
+      redis-rack (~> 1.4.4)
+      redis-store (~> 1.1.4)
+    redis-activesupport (3.2.4)
+      activesupport (~> 3.2.0)
       redis-store (~> 1.1.0)
-    redis-activesupport (3.2.3)
-      activesupport (~> 3.2.3)
-      redis-store (~> 1.1.0)
-    redis-namespace (1.3.0)
+    redis-namespace (1.3.1)
       redis (~> 3.0.0)
-    redis-rack (1.4.2)
-      rack (~> 1.4.1)
-      redis-store (~> 1.1.0)
-    redis-rails (3.2.3)
-      redis-actionpack (~> 3.2.3)
-      redis-activesupport (~> 3.2.3)
-      redis-store (~> 1.1.0)
-    redis-store (1.1.3)
-      redis (>= 2.2.0)
+    redis-rack (1.4.4)
+      rack (~> 1.4.0)
+      redis-store (~> 1.1.4)
+    redis-rails (3.2.4)
+      redis-actionpack (~> 3.2.4)
+      redis-activesupport (~> 3.2.4)
+      redis-store (~> 1.1.4)
+    redis-store (1.1.4)
+      redis (>= 2.2)
     ref (1.0.5)
+    require_all (1.3.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (2.13.0)
@@ -418,13 +423,13 @@ GEM
       rspec-expectations (~> 2.13.0)
       rspec-mocks (~> 2.13.0)
     ruby-hmac (0.4.0)
-    ruby-progressbar (1.1.1)
+    ruby-progressbar (1.2.0)
     rubyntlm (0.1.1)
     rubyzip (0.9.9)
     safe_yaml (0.9.3)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
-    sass (3.2.9)
+    sass (3.2.11)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -444,14 +449,14 @@ GEM
       rubyzip
       websocket (~> 1.0.4)
     settingslogic (2.0.9)
-    sexp_processor (4.2.1)
+    sexp_processor (4.3.0)
     shoulda-matchers (2.1.0)
       activesupport (>= 3.0.0)
-    sidekiq (2.12.4)
+    sidekiq (2.14.0)
       celluloid (>= 0.14.1)
       connection_pool (>= 1.0.0)
       json
-      redis (>= 3.0)
+      redis (>= 3.0.4)
       redis-namespace
     simple_oauth (0.1.9)
     simplecov (0.7.1)
@@ -484,7 +489,9 @@ GEM
     state_machine (1.2.0)
     stringex (1.5.1)
     temple (0.6.5)
-    test_after_commit (0.2.0)
+    term-ansicolor (1.2.2)
+      tins (~> 0.8)
+    test_after_commit (0.2.1)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
@@ -504,6 +511,7 @@ GEM
       mime-types (~> 1.19)
       multi_json (~> 1.5)
       twitter-stream (~> 0.1)
+    tins (0.11.0)
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
@@ -525,12 +533,13 @@ GEM
     virtus (0.5.5)
       backports (~> 3.3)
       descendants_tracker (~> 0.0.1)
-    warden (1.2.1)
+    warden (1.2.3)
       rack (>= 1.0)
     webmock (1.11.0)
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
     websocket (1.0.7)
+    websocket-driver (0.3.0)
     xpath (2.0.0)
       nokogiri (~> 1.3)
     yajl-ruby (1.1.0)
@@ -540,7 +549,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
-  annotate!
+  annotate (~> 2.6.0.beta2)
   asciidoctor
   awesome_print
   better_errors
@@ -548,27 +557,28 @@ DEPENDENCIES
   bootstrap-sass
   capybara
   carrierwave
-  chosen-rails (= 0.9.8)
+  chosen-rails (= 1.0.0)
   coffee-rails
   colored
   coveralls
   d3_rails (~> 3.1.4)
   database_cleaner
-  devise
+  devise (~> 2.2)
   email_spec
   enumerize
   factory_girl_rails
   ffaker
   fog (~> 1.3.1)
-  font-awesome-rails (~> 3.1.1)
+  font-awesome-rails
   foreman
   gemoji (~> 1.2.1)
   github-linguist
   github-markup (~> 0.7.4)
+  gitlab-flowdock-git-hook (~> 0.4.2)
   gitlab-gollum-lib (~> 1.0.1)
   gitlab-grack (~> 1.0.1)
   gitlab-pygments.rb (~> 0.3.2)
-  gitlab_git (~> 1.4.1)
+  gitlab_git (~> 3.0.0.beta1)
   gitlab_meta (= 6.0)
   gitlab_omniauth-ldap (= 1.0.3)
   gon
@@ -596,15 +606,15 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-twitter
   pg
-  poltergeist (~> 1.3.0)
+  poltergeist (~> 1.4.1)
   pry
-  puma (~> 2.3.1)
   quiet_assets (~> 1.0.1)
+  rack-attack
   rack-mini-profiler
   rails (= 3.2.13)
   rails-dev-tweaks
   rails_best_practices
-  raphael-rails!
+  raphael-rails (~> 2.1.2)
   rb-fsevent
   rb-inotify
   redcarpet (~> 2.2.2)

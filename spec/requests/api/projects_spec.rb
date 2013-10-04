@@ -3,6 +3,7 @@ require 'spec_helper'
 describe API::API do
   include ApiHelpers
   before(:each) { enable_observers }
+  after(:each) { disable_observers }
 
   let(:user) { create(:user) }
   let(:user2) { create(:user) }
@@ -104,6 +105,21 @@ describe API::API do
         json_response[k.to_s].should == v
       end
     end
+
+    it "should set a project as public" do
+      project = attributes_for(:project, { public: true })
+      post api("/projects", user), project
+      json_response['public'].should be_true
+
+    end
+
+    it "should set a project as private" do
+      project = attributes_for(:project, { public: false })
+      post api("/projects", user), project
+      json_response['public'].should be_false
+
+    end
+
   end
 
   describe "POST /projects/user/:id" do
@@ -144,6 +160,21 @@ describe API::API do
         json_response[k.to_s].should == v
       end
     end
+
+    it "should set a project as public" do
+      project = attributes_for(:project, { public: true })
+      post api("/projects/user/#{user.id}", admin), project
+      json_response['public'].should be_true
+
+    end
+
+    it "should set a project as private" do
+      project = attributes_for(:project, { public: false })
+      post api("/projects/user/#{user.id}", admin), project
+      json_response['public'].should be_false
+
+    end
+
   end
 
   describe "GET /projects/:id" do
@@ -445,7 +476,6 @@ describe API::API do
     end
   end
 
-
   describe "GET /projects/:id/snippets" do
     it "should return an array of project snippets" do
       get api("/projects/#{project.id}/snippets", user)
@@ -659,6 +689,44 @@ describe API::API do
         delete api("/projects/#{project_fork_target.id}/fork", admin)
         response.status.should == 200
         project_fork_target.reload.forked_from_project.should be_nil
+      end
+    end
+  end
+
+  describe "GET /projects/search/:query" do
+    let!(:query) { 'query'}
+    let!(:search) { create(:project, name: query, creator_id: user.id, namespace: user.namespace) }
+    let!(:pre) { create(:project, name: "pre_#{query}", creator_id: user.id, namespace: user.namespace) }
+    let!(:post) { create(:project, name: "#{query}_post", creator_id: user.id, namespace: user.namespace) }
+    let!(:pre_post) { create(:project, name: "pre_#{query}_post", creator_id: user.id, namespace: user.namespace) }
+    let!(:unfound) { create(:project, name: 'unfound', creator_id: user.id, namespace: user.namespace) }
+    let!(:public) { create(:project, name: "another #{query}",public: true) }
+    let!(:unfound_public) { create(:project, name: 'unfound public', public: true) }
+
+    context "when unauthenticated" do
+      it "should return authentication error" do
+        get api("/projects/search/#{query}")
+        response.status.should == 401
+      end
+    end
+
+    context "when authenticated" do
+      it "should return an array of projects" do
+        get api("/projects/search/#{query}",user)
+        response.status.should == 200
+        json_response.should be_an Array
+        json_response.size.should == 5
+        json_response.each {|project| project['name'].should =~ /.*query.*/}
+      end
+    end
+
+    context "when authenticated as a different user" do
+      it "should return matching public projects" do
+        get api("/projects/search/#{query}", user2)
+        response.status.should == 200
+        json_response.should be_an Array
+        json_response.size.should == 1
+        json_response.first['name'].should == "another #{query}"
       end
     end
   end

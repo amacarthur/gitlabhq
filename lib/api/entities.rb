@@ -3,6 +3,9 @@ module API
     class User < Grape::Entity
       expose :id, :username, :email, :name, :bio, :skype, :linkedin, :twitter,
              :theme_id, :color_scheme_id, :state, :created_at, :extern_uid, :provider
+      expose :is_admin?, as: :is_admin
+      expose :can_create_group?, as: :can_create_group
+      expose :can_create_project?, as: :can_create_project
     end
 
     class UserSafe < Grape::Entity
@@ -15,10 +18,6 @@ module API
 
     class UserLogin < User
       expose :private_token
-      expose :is_admin?, as: :is_admin
-      expose :can_create_group?, as: :can_create_group
-      expose :can_create_project?, as: :can_create_project
-      expose :can_create_team?, as: :can_create_team
     end
 
     class Hook < Grape::Entity
@@ -36,7 +35,7 @@ module API
       expose :owner, using: Entities::UserBasic
       expose :name, :name_with_namespace
       expose :path, :path_with_namespace
-      expose :issues_enabled, :merge_requests_enabled, :wall_enabled, :wiki_enabled, :snippets_enabled, :created_at, :last_activity_at
+      expose :issues_enabled, :merge_requests_enabled, :wall_enabled, :wiki_enabled, :snippets_enabled, :created_at, :last_activity_at, :public
       expose :namespace
       expose :forked_from_project, using: Entities::ForkedFromProject, :if => lambda{ | project, options | project.forked? }
     end
@@ -65,6 +64,12 @@ module API
 
     class GroupDetail < Group
       expose :projects, using: Entities::Project
+    end
+
+    class GroupMember < UserBasic
+      expose :group_access, as: :access_level do |user, options|
+        options[:group].users_groups.find_by_user_id(user.id).group_access
+      end
     end
 
     class RepoObject < Grape::Entity
@@ -107,7 +112,8 @@ module API
     end
 
     class MergeRequest < Grape::Entity
-      expose :id, :target_branch, :source_branch, :project_id, :title, :state
+      expose :id, :target_branch, :source_branch, :title, :state
+      expose :target_project_id, as: :project_id
       expose :author, :assignee, using: Entities::UserBasic
     end
 

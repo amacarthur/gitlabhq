@@ -10,9 +10,6 @@
       margin: 0px;
       box-shadow: none;
 
-      > .title {
-        padding: 2px 15px;
-      }
       .nav-projects-tabs li { padding: 0; }
     }
   }
@@ -33,12 +30,10 @@
 
 .dashboard {
   .dash-filter {
-    margin: 0;
+    margin: 7px 0;
     padding: 4px 6px;
     width: 202px;
     float: left;
-    margin-top: 3px;
-    margin-left: -2px;
   }
 }
 
@@ -71,7 +66,7 @@
 }
 
 .project-row, .group-row {
-  padding: 15px !important;
+  padding: 10px 15px !important;
 
   .namespace-name {
     color: #666;
@@ -82,7 +77,6 @@
     font-size: 16px;
   }
 
-
   .arrow {
     float: right;
     padding: 10px 5px;
@@ -91,12 +85,18 @@
     color: #666;
   }
 
-  .last-activity, .owner-info {
+  .last-activity {
     color: #AAA;
     display: block;
     margin-top: 5px;
-    .date, .owner {
+    .date {
       color: #777;
     }
+  }
+}
+
+.group-row {
+  .arrow {
+    padding: 2px 5px;
   }
 }

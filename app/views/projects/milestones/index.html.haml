@@ -1,12 +1,11 @@
 = render "projects/issues/head"
 .milestones_content
-  %h3.page_title
+  %h3.page-title
     Milestones
     - if can? current_user, :admin_milestone, @project
-      = link_to new_project_milestone_path(@project), class: "pull-right btn btn-primary", title: "New Milestone" do
+      = link_to new_project_milestone_path(@project), class: "pull-right btn btn-new", title: "New Milestone" do
         %i.icon-plus
         New Milestone
-  %br
 
   .row
     .span3
@@ -27,6 +26,6 @@
 
           - if @milestones.blank?
             %li
-              %h3.nothing_here_message Nothing to show here
+              %h3.nothing_here_message No milestones to show
 
       = paginate @milestones, theme: "gitlab"

@@ -1,21 +1,18 @@
-%h3.page_title
-  GITLAB
+%h2.page-title
+  GitLab
   .pull-right
     %span= Gitlab::VERSION
     %small= Gitlab::REVISION
-%hr
-%p.lead
+%p.slead
   Self Hosted Git Management
   %br
   Fast, secure and stable solution based on Ruby on Rails.
-
-%br
 
 .row
   .span4
     .ui-box
       .title
-        %h5 Quick help
+        Quick help
       %ul.well-list
         %li
           Email your
@@ -39,7 +36,7 @@
   .span4
     .ui-box
       .title
-        %h5 User documentation
+        User documentation
       %ul.well-list
         %li
           %strong= link_to "Workflow", help_workflow_path
@@ -68,7 +65,7 @@
   .span4
     .ui-box
       .title
-        %h5 Admin documentation
+        Admin documentation
       %ul.well-list
 
         %li
@@ -82,3 +79,7 @@
         %li
           %strong= link_to "Public Access", help_public_access_path
           %p Learn how you can allow public access to a project.
+
+        %li
+          %strong= link_to "Security", help_security_path
+          %p Learn what you can do to secure your GitLab instance.

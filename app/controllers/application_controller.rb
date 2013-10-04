@@ -91,8 +91,8 @@ class ApplicationController < ActionController::Base
     return access_denied! unless can?(current_user, :download_code, project) or project.public?
   end
 
-  def authorize_create_team!
-    return access_denied! unless can?(current_user, :create_team, nil)
+  def authorize_push!
+    return access_denied! unless can?(current_user, :push_code, project)
   end
 
   def access_denied!
@@ -151,8 +151,13 @@ class ApplicationController < ActionController::Base
   end
 
   def check_password_expiration
-    if current_user && current_user.password_expires_at && current_user.password_expires_at < Time.now
+    if current_user && current_user.password_expires_at && current_user.password_expires_at < Time.now  && !current_user.ldap_user?
       redirect_to new_profile_password_path and return
     end
+  end
+
+  def event_filter
+    filters = cookies['event_filter'].split(',') if cookies['event_filter'].present?
+    @event_filter ||= EventFilter.new(filters)
   end
 end

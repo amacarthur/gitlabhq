@@ -1,7 +1,9 @@
 = render "head"
 
 - if @path.present?
-  %ul.breadcrumb
+  %ul.breadcrumb.commit-breadcrumb
+    %li.light
+      History for
     = commits_breadcrumbs
 
 %div{id: dom_id(@project)}

@@ -1,4 +1,4 @@
-%h3.page_title
+%h3.page-title
   - if @service.activated?
     %span.cgreen
       %i.icon-circle
@@ -9,7 +9,7 @@
 
 %p= @service.description
 
-.back_link
+.back-link
   = link_to project_services_path(@project) do
     &larr; to services
 
@@ -44,5 +44,5 @@
   .form-actions
     = f.submit 'Save', class: 'btn btn-save'
     &nbsp;
-    - if @service.valid? && @service.activated?
+    - if @service.valid? && @service.activated? && @service.can_test?
       = link_to 'Test settings', test_project_service_path(@project, @service.to_param), class: 'btn btn-small'

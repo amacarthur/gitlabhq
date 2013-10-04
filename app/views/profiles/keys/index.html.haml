@@ -1,20 +1,18 @@
-%h3.page_title
-  SSH Keys
-  = link_to "Add SSH Key", new_profile_key_path, class: "btn pull-right btn-primary"
-
-%br
+%h3.page-title
+  My SSH keys
+  .pull-right
+    = link_to "Add SSH Key", new_profile_key_path, class: "btn btn-new"
 %p.light
-  SSH key allows you to establish a secure connection between your computer and GitLab
-%p.light
-  Before you can add ssh key you need to
+  SSH keys allow you to establish a secure connection between your computer and GitLab
+  %br
+  Before you can add an SSH key you need to
   = link_to "generate it", help_ssh_path
-
+%hr
 
 
 .ui-box
-  %h5.title
+  .title
     SSH Keys (#{@keys.count})
-    .pull-right
   %ul.well-list#keys-table
     = render @keys
     - if @keys.blank?
